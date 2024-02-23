@@ -2,9 +2,9 @@ services:
   - type: web
     name: strapi
     env: node
-    plan: starter
-    buildCommand: npm run install && npm run build
-    startCommand: npm run start
+    plan: free
+    buildCommand: yarn install && yarn build
+    startCommand: yarn start
     healthCheckPath: /_health
     autoDeploy: false
     disk:
