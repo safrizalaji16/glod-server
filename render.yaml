@@ -3,7 +3,7 @@ services:
     name: strapi
     env: node
     plan: free
-    buildCommand: yarn install && yarn build
+    buildCommand: yarn install && yarn; yarn build
     startCommand: yarn start
     healthCheckPath: /_health
     autoDeploy: false
