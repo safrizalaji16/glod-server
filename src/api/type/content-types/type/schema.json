@@ -1,20 +1,25 @@
 {
   "kind": "collectionType",
-  "collectionName": "colors",
+  "collectionName": "types",
   "info": {
-    "singularName": "color",
-    "pluralName": "colors",
-    "displayName": "Color"
+    "singularName": "type",
+    "pluralName": "types",
+    "displayName": "Type"
   },
   "options": {
     "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
-    "title": {
+    "tilte": {
       "type": "string",
       "required": true,
       "unique": true
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "tilte",
+      "required": true
     },
     "status": {
       "type": "boolean",
@@ -25,13 +30,15 @@
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::product.product",
-      "inversedBy": "colors"
+      "inversedBy": "types"
     },
     "images": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::image.image",
-      "mappedBy": "color"
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": true,
+      "required": true
     }
   }
 }

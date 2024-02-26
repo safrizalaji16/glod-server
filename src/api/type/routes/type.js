@@ -1,9 +1,9 @@
 'use strict';
 
 /**
- * image router
+ * type router
  */
 
 const { createCoreRouter } = require('@strapi/strapi').factories;
 
-module.exports = createCoreRouter('api::image.image');
+module.exports = createCoreRouter('api::type.type');

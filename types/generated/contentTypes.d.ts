@@ -783,87 +783,6 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
-export interface ApiColorColor extends Schema.CollectionType {
-  collectionName: 'colors';
-  info: {
-    singularName: 'color';
-    pluralName: 'colors';
-    displayName: 'Color';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    title: Attribute.String & Attribute.Required & Attribute.Unique;
-    status: Attribute.Boolean & Attribute.Required & Attribute.DefaultTo<false>;
-    product: Attribute.Relation<
-      'api::color.color',
-      'manyToOne',
-      'api::product.product'
-    >;
-    images: Attribute.Relation<
-      'api::color.color',
-      'oneToMany',
-      'api::image.image'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::color.color',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::color.color',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiImageImage extends Schema.CollectionType {
-  collectionName: 'images';
-  info: {
-    singularName: 'image';
-    pluralName: 'images';
-    displayName: 'Image';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    title: Attribute.String & Attribute.Required & Attribute.Unique;
-    type: Attribute.Enumeration<['cover', 'color', 'banner']> &
-      Attribute.Required;
-    product: Attribute.Relation<
-      'api::image.image',
-      'manyToOne',
-      'api::product.product'
-    >;
-    color: Attribute.Relation<
-      'api::image.image',
-      'manyToOne',
-      'api::color.color'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::image.image',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::image.image',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 export interface ApiProductProduct extends Schema.CollectionType {
   collectionName: 'products';
   info: {
@@ -886,30 +805,25 @@ export interface ApiProductProduct extends Schema.CollectionType {
     type: Attribute.Enumeration<['Jersey', 'Shirt', 'Accesories']> &
       Attribute.Required;
     slug: Attribute.UID<'api::product.product', 'title'> & Attribute.Required;
-    sizes: Attribute.Relation<
-      'api::product.product',
-      'oneToMany',
-      'api::size.size'
-    >;
     tags: Attribute.Relation<
       'api::product.product',
       'oneToMany',
       'api::tag.tag'
     >;
-    images: Attribute.Relation<
-      'api::product.product',
-      'oneToMany',
-      'api::image.image'
-    >;
-    colors: Attribute.Relation<
-      'api::product.product',
-      'oneToMany',
-      'api::color.color'
-    >;
     products: Attribute.Relation<
       'api::product.product',
       'oneToMany',
       'api::product.product'
+    >;
+    types: Attribute.Relation<
+      'api::product.product',
+      'oneToMany',
+      'api::type.type'
+    >;
+    sizes: Attribute.Relation<
+      'api::product.product',
+      'manyToMany',
+      'api::size.size'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -934,16 +848,16 @@ export interface ApiSizeSize extends Schema.CollectionType {
     singularName: 'size';
     pluralName: 'sizes';
     displayName: 'Size';
+    description: '';
   };
   options: {
     draftAndPublish: false;
   };
   attributes: {
     title: Attribute.String & Attribute.Required & Attribute.Unique;
-    status: Attribute.Boolean & Attribute.Required & Attribute.DefaultTo<false>;
-    product: Attribute.Relation<
+    products: Attribute.Relation<
       'api::size.size',
-      'manyToOne',
+      'manyToMany',
       'api::product.product'
     >;
     createdAt: Attribute.DateTime;
@@ -981,6 +895,35 @@ export interface ApiTagTag extends Schema.CollectionType {
   };
 }
 
+export interface ApiTypeType extends Schema.CollectionType {
+  collectionName: 'types';
+  info: {
+    singularName: 'type';
+    pluralName: 'types';
+    displayName: 'Type';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    tilte: Attribute.String & Attribute.Required & Attribute.Unique;
+    slug: Attribute.UID<'api::type.type', 'tilte'> & Attribute.Required;
+    status: Attribute.Boolean & Attribute.Required & Attribute.DefaultTo<false>;
+    product: Attribute.Relation<
+      'api::type.type',
+      'manyToOne',
+      'api::product.product'
+    >;
+    images: Attribute.Media & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::type.type', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::type.type', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -999,11 +942,10 @@ declare module '@strapi/types' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
-      'api::color.color': ApiColorColor;
-      'api::image.image': ApiImageImage;
       'api::product.product': ApiProductProduct;
       'api::size.size': ApiSizeSize;
       'api::tag.tag': ApiTagTag;
+      'api::type.type': ApiTypeType;
     }
   }
 }
