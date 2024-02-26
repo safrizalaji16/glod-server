@@ -4,7 +4,8 @@
   "info": {
     "singularName": "size",
     "pluralName": "sizes",
-    "displayName": "Size"
+    "displayName": "Size",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false
@@ -16,14 +17,9 @@
       "required": true,
       "unique": true
     },
-    "status": {
-      "type": "boolean",
-      "default": false,
-      "required": true
-    },
-    "product": {
+    "products": {
       "type": "relation",
-      "relation": "manyToOne",
+      "relation": "manyToMany",
       "target": "api::product.product",
       "inversedBy": "sizes"
     }
