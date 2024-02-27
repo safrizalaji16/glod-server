@@ -798,7 +798,7 @@ export interface ApiProductProduct extends Schema.CollectionType {
     title: Attribute.String;
     description: Attribute.Blocks & Attribute.Required;
     price: Attribute.BigInteger & Attribute.Required & Attribute.DefaultTo<'0'>;
-    discount: Attribute.BigInteger & Attribute.DefaultTo<'0'>;
+    discountPrice: Attribute.BigInteger & Attribute.DefaultTo<'0'>;
     material: Attribute.Text;
     productLink: Attribute.String & Attribute.Required;
     status: Attribute.Boolean & Attribute.Required & Attribute.DefaultTo<false>;
@@ -819,11 +819,6 @@ export interface ApiProductProduct extends Schema.CollectionType {
       'api::product.product',
       'oneToMany',
       'api::type.type'
-    >;
-    sizes: Attribute.Relation<
-      'api::product.product',
-      'manyToMany',
-      'api::size.size'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -855,11 +850,7 @@ export interface ApiSizeSize extends Schema.CollectionType {
   };
   attributes: {
     title: Attribute.String & Attribute.Required & Attribute.Unique;
-    products: Attribute.Relation<
-      'api::size.size',
-      'manyToMany',
-      'api::product.product'
-    >;
+    types: Attribute.Relation<'api::size.size', 'manyToMany', 'api::type.type'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<'api::size.size', 'oneToOne', 'admin::user'> &
@@ -916,6 +907,7 @@ export interface ApiTypeType extends Schema.CollectionType {
       'api::product.product'
     >;
     images: Attribute.Media & Attribute.Required;
+    sizes: Attribute.Relation<'api::type.type', 'manyToMany', 'api::size.size'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<'api::type.type', 'oneToOne', 'admin::user'> &
