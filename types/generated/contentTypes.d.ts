@@ -901,13 +901,14 @@ export interface ApiTypeType extends Schema.CollectionType {
     singularName: 'type';
     pluralName: 'types';
     displayName: 'Type';
+    description: '';
   };
   options: {
     draftAndPublish: false;
   };
   attributes: {
-    tilte: Attribute.String & Attribute.Required & Attribute.Unique;
-    slug: Attribute.UID<'api::type.type', 'tilte'> & Attribute.Required;
+    title: Attribute.String & Attribute.Required & Attribute.Unique;
+    slug: Attribute.UID & Attribute.Required;
     status: Attribute.Boolean & Attribute.Required & Attribute.DefaultTo<false>;
     product: Attribute.Relation<
       'api::type.type',
