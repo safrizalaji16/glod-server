@@ -17,10 +17,10 @@
       "required": true,
       "unique": true
     },
-    "products": {
+    "types": {
       "type": "relation",
       "relation": "manyToMany",
-      "target": "api::product.product",
+      "target": "api::type.type",
       "inversedBy": "sizes"
     }
   }
