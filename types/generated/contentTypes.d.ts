@@ -802,8 +802,6 @@ export interface ApiProductProduct extends Schema.CollectionType {
     material: Attribute.Text;
     productLink: Attribute.String & Attribute.Required;
     status: Attribute.Boolean & Attribute.Required & Attribute.DefaultTo<false>;
-    type: Attribute.Enumeration<['Jersey', 'Shirt', 'Accesories']> &
-      Attribute.Required;
     slug: Attribute.UID<'api::product.product', 'title'> & Attribute.Required;
     tags: Attribute.Relation<
       'api::product.product',
@@ -815,9 +813,10 @@ export interface ApiProductProduct extends Schema.CollectionType {
       'oneToMany',
       'api::product.product'
     >;
-    types: Attribute.Relation<
+    subTypes: Attribute.Component<'product.types', true> & Attribute.Required;
+    type: Attribute.Relation<
       'api::product.product',
-      'oneToMany',
+      'manyToOne',
       'api::type.type'
     >;
     createdAt: Attribute.DateTime;
@@ -850,7 +849,6 @@ export interface ApiSizeSize extends Schema.CollectionType {
   };
   attributes: {
     title: Attribute.String & Attribute.Required & Attribute.Unique;
-    types: Attribute.Relation<'api::size.size', 'manyToMany', 'api::type.type'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<'api::size.size', 'oneToOne', 'admin::user'> &
@@ -899,15 +897,11 @@ export interface ApiTypeType extends Schema.CollectionType {
   };
   attributes: {
     title: Attribute.String & Attribute.Required & Attribute.Unique;
-    slug: Attribute.UID & Attribute.Required;
-    status: Attribute.Boolean & Attribute.Required & Attribute.DefaultTo<false>;
-    product: Attribute.Relation<
+    products: Attribute.Relation<
       'api::type.type',
-      'manyToOne',
+      'oneToMany',
       'api::product.product'
     >;
-    images: Attribute.Media & Attribute.Required;
-    sizes: Attribute.Relation<'api::type.type', 'manyToMany', 'api::size.size'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<'api::type.type', 'oneToOne', 'admin::user'> &

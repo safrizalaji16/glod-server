@@ -43,15 +43,6 @@
       "default": false,
       "required": true
     },
-    "type": {
-      "type": "enumeration",
-      "enum": [
-        "Jersey",
-        "Shirt",
-        "Accesories"
-      ],
-      "required": true
-    },
     "slug": {
       "type": "uid",
       "targetField": "title",
@@ -68,11 +59,18 @@
       "relation": "oneToMany",
       "target": "api::product.product"
     },
-    "types": {
+    "subTypes": {
+      "displayName": "types",
+      "type": "component",
+      "repeatable": true,
+      "component": "product.types",
+      "required": true
+    },
+    "type": {
       "type": "relation",
-      "relation": "oneToMany",
+      "relation": "manyToOne",
       "target": "api::type.type",
-      "mappedBy": "product"
+      "inversedBy": "products"
     }
   }
 }
