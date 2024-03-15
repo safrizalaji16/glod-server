@@ -1,0 +1,20 @@
+{
+  "collectionName": "components_about_us_descriptive_texts",
+  "info": {
+    "displayName": "DescriptiveText",
+    "icon": "file",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "unique": false
+    },
+    "description": {
+      "type": "blocks",
+      "required": true
+    }
+  }
+}

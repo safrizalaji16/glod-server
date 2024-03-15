@@ -1,0 +1,36 @@
+{
+  "kind": "singleType",
+  "collectionName": "about_uses",
+  "info": {
+    "singularName": "about-us",
+    "pluralName": "about-uses",
+    "displayName": "AboutUs",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "aboutUs": {
+      "type": "component",
+      "repeatable": false,
+      "component": "about-us.descriptive-text",
+      "required": true
+    },
+    "coverImage": {
+      "type": "media",
+      "multiple": true,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "history": {
+      "type": "component",
+      "repeatable": false,
+      "component": "about-us.descriptive-text",
+      "required": true
+    }
+  }
+}
