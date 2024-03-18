@@ -71,6 +71,11 @@
       "relation": "manyToOne",
       "target": "api::type.type",
       "inversedBy": "products"
+    },
+    "countClick": {
+      "type": "biginteger",
+      "required": true,
+      "default": "0"
     }
   }
 }
