@@ -885,6 +885,9 @@ export interface ApiProductProduct extends Schema.CollectionType {
       'manyToOne',
       'api::type.type'
     >;
+    countClick: Attribute.BigInteger &
+      Attribute.Required &
+      Attribute.DefaultTo<'0'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
