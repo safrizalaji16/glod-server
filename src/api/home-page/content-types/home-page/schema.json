@@ -27,7 +27,7 @@
     },
     "BannerImage3": {
       "type": "component",
-      "repeatable": true,
+      "repeatable": false,
       "component": "home.banner-image",
       "required": true
     }

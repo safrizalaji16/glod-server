@@ -831,8 +831,7 @@ export interface ApiHomePageHomePage extends Schema.SingleType {
   attributes: {
     BannerImage1: Attribute.Component<'home.banner-image'> & Attribute.Required;
     BannerImage2: Attribute.Component<'home.banner-image'> & Attribute.Required;
-    BannerImage3: Attribute.Component<'home.banner-image', true> &
-      Attribute.Required;
+    BannerImage3: Attribute.Component<'home.banner-image'> & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
