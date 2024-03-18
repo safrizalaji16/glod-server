@@ -13,6 +13,18 @@ export interface AboutUsDescriptiveText extends Schema.Component {
   };
 }
 
+export interface HomeBannerImage extends Schema.Component {
+  collectionName: 'components_home_banner_images';
+  info: {
+    displayName: 'BannerImage';
+    icon: 'gate';
+    description: '';
+  };
+  attributes: {
+    banner: Attribute.Media & Attribute.Required;
+  };
+}
+
 export interface ProductTypes extends Schema.Component {
   collectionName: 'components_product_types_types';
   info: {
@@ -32,6 +44,7 @@ declare module '@strapi/types' {
   export module Shared {
     export interface Components {
       'about-us.descriptive-text': AboutUsDescriptiveText;
+      'home.banner-image': HomeBannerImage;
       'product.types': ProductTypes;
     }
   }
