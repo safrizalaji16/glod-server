@@ -874,7 +874,7 @@ export interface ApiProductProduct extends Schema.CollectionType {
       'oneToMany',
       'api::tag.tag'
     >;
-    products: Attribute.Relation<
+    relatedProducts: Attribute.Relation<
       'api::product.product',
       'oneToMany',
       'api::product.product'
