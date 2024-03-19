@@ -54,7 +54,7 @@
       "target": "api::tag.tag",
       "mappedBy": "product"
     },
-    "products": {
+    "relatedProducts": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::product.product"
