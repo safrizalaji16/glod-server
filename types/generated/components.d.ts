@@ -33,7 +33,7 @@ export interface ProductTypes extends Schema.Component {
     description: '';
   };
   attributes: {
-    title: Attribute.String & Attribute.Required & Attribute.Unique;
+    title: Attribute.String & Attribute.Required;
     images: Attribute.Media & Attribute.Required;
     status: Attribute.Boolean & Attribute.Required & Attribute.DefaultTo<false>;
     sizes: Attribute.Relation<'product.types', 'oneToMany', 'api::size.size'>;
